@@ -13,10 +13,12 @@ exports.handler = async (event) => {
       };
     }
 
-    // Replace this with your real Stripe price IDs
     const priceMap = {
-      // Example:
-      // "product-id-from-your-site": "price_xxxxxxxxx"
+      "guided-ice": "price_1TqobQQ9xgSB9tszPa0d0UOB",
+      "21-day-reset": "price_1TqobMQ9xgSB9tszAHuU9eQ6",
+      "starter-kit": "price_1TqobLQ9xgSB9tszs3S5Zs8L",
+      "thermometer": "price_1TqobLQ9xgSB9tszZuLdK1Hh",
+      "breath-trainer": "price_1TqobLQ9xgSB9tszjbeQddEt",
     };
 
     const line_items = items.map((item) => {
@@ -35,8 +37,8 @@ exports.handler = async (event) => {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       line_items,
-    success_url: `${process.env.URL}/payment-success`,
-    cancel_url: `${process.env.URL}/payment-canceled`,
+      success_url: `${process.env.URL}/payment-success`,
+      cancel_url: `${process.env.URL}/payment-canceled`,
     });
 
     return {
